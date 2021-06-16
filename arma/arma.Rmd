@@ -1,0 +1,21 @@
+---
+title: "arma"
+output: html_document
+---
+
+```{r}
+library(rstan)
+library(tidybayes)
+library(bayesplot)
+```
+
+```{r}
+model = rstan::stan("arma.stan", iter = 1000)
+result = as.data.frame(rstan::extract(model))
+traceplot(model)
+plot(model)
+hist(result$mu,breaks = 100)
+pairs(model)
+```
+
+
